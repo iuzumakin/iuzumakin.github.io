@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>xVan on xVan</title>
+    <link>https://cheng.fan/</link>
+    <description>Recent content in xVan on xVan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 26 Mar 2019 19:37:39 +0800</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Fish</title>
+      <link>https://cheng.fan/2019/fish/</link>
+      <pubDate>Tue, 26 Mar 2019 19:37:39 +0800</pubDate>
+      
+      <guid>https://cheng.fan/2019/fish/</guid>
+      <description>&lt;p&gt;第一天的鱼&lt;br /&gt;
+emmmm 基本语法快看完了&lt;br /&gt;
+这个函数闭包 没咋理解&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
+
+import &amp;quot;fmt&amp;quot;
+
+// fibonacci 函数会返回一个返回 int 的函数。
+func fibonacci() func() int {
+    sum := 0
+    a := 0
+    b := 1
+    return func() int {
+        sum =  a + b
+        a = b
+        b = sum
+        return sum
+    }
+}
+
+func main() {
+    f := fibonacci()
+    fmt.Println(f())
+    for i := 0; i &amp;lt; 10; i++ {
+        fmt.Println(f())
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hello Go!</title>
+      <link>https://cheng.fan/2019/hello-go/</link>
+      <pubDate>Tue, 26 Mar 2019 01:48:34 +0800</pubDate>
+      
+      <guid>https://cheng.fan/2019/hello-go/</guid>
+      <description>&lt;p&gt;这可能是开始学习Go的标志，也可能不是。&lt;/p&gt;
+
+&lt;p&gt;谁晓得呢~ 三天打鱼第一天 0.0&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://cheng.fan/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cheng.fan/about/</guid>
+      <description>
+
+&lt;h3 id=&#34;关于本站&#34;&gt;关于本站&lt;/h3&gt;
+
+&lt;p&gt;在梦里酝酿了好久，大脑觉得他已经OK了，但是手脚说你行你上，懒得不行，空闲时间就尝试下搞一个折腾~&lt;/p&gt;
+
+&lt;p&gt;就当拿来记录吧，毕竟柯南道尔说过人的大脑就像一间阁楼，balabala，空间是有限的……&lt;/p&gt;
+
+&lt;p&gt;就酱 &amp;lt;(￣︶￣)↗[GO!]&lt;/p&gt;
+
+&lt;h3 id=&#34;关于我&#34;&gt;关于我&lt;/h3&gt;
+
+&lt;p&gt;我也不知道怎么回答，三天打鱼两天晒网的反面典型吧，hhhh&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

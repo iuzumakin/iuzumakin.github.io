@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on xVan</title>
+    <link>https://cheng.fan/posts/</link>
+    <description>Recent content in Posts on xVan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 26 Mar 2019 19:37:39 +0800</lastBuildDate>
+    
+	<atom:link href="https://cheng.fan/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fish</title>
+      <link>https://cheng.fan/2019/fish/</link>
+      <pubDate>Tue, 26 Mar 2019 19:37:39 +0800</pubDate>
+      
+      <guid>https://cheng.fan/2019/fish/</guid>
+      <description>第一天的鱼
+emmmm 基本语法快看完了
+这个函数闭包 没咋理解
+package main import &amp;quot;fmt&amp;quot; // fibonacci 函数会返回一个返回 int 的函数。 func fibonacci() func() int { sum := 0 a := 0 b := 1 return func() int { sum = a + b a = b b = sum return sum } } func main() { f := fibonacci() fmt.Println(f()) for i := 0; i &amp;lt; 10; i++ { fmt.Println(f()) } }  </description>
+    </item>
+    
+    <item>
+      <title>Hello Go!</title>
+      <link>https://cheng.fan/2019/hello-go/</link>
+      <pubDate>Tue, 26 Mar 2019 01:48:34 +0800</pubDate>
+      
+      <guid>https://cheng.fan/2019/hello-go/</guid>
+      <description>这可能是开始学习Go的标志，也可能不是。
+谁晓得呢~ 三天打鱼第一天 0.0</description>
+    </item>
+    
+  </channel>
+</rss>
