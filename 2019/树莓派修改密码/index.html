@@ -9,9 +9,9 @@
   <meta name="description" content="一个折腾的地方">
   
   
-  <link rel="prev" href="https://cheng.fan/2019/hello-go/" />
-  <link rel="next" href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/" />
-  <link rel="canonical" href="https://cheng.fan/2019/fish/" />
+  <link rel="prev" href="https://cheng.fan/2019/fish/" />
+  
+  <link rel="canonical" href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           Fish | xVan
+           树莓派修改密码 | xVan
        
   </title>
-  <meta name="title" content="Fish | xVan">
+  <meta name="title" content="树莓派修改密码 | xVan">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,12 +44,14 @@
          "@id": "https://cheng.fan/"
     },
     "articleSection" : "posts",
-    "name" : "Fish",
-    "headline" : "Fish",
-    "description" : "第一天的鱼
-emmmm 基本语法快看完了
-这个函数闭包 没咋理解
-package main import &quot;fmt&quot; // fibonacci 函数会返回一个返回 int 的函数。 func fibonacci() func() int { sum := 0 a := 0 b := 1 return func() int { sum = a + b a = b b = sum return sum } } func main() { f := fibonacci() fmt.Println(f()) for i := 0; i &lt; 10; i++ { fmt.Println(f()) } }  ",
+    "name" : "树莓派修改密码",
+    "headline" : "树莓派修改密码",
+    "description" : "树莓派修改密码 拿到一个硬件黑盒玩，连上网后，k3分配了个ip，多看了一眼发现识别为Raspberry，嗯？黑盒里是树莓派？下意识ssh尝试连进去，发现默认密码不对，随便输入几个弱密码也不行。拆开盒子发现果然一部分是树莓派，和我在用的2b 一模一样（嫌弃网口100M），好吧，那就开始改密码吧 备份文件 因为之前很多次翻车的经验，首先要做的当然能备份的东西都备着，有备无患嘛~用DiskGenius即可，因为树莓派中的文件可见，直接进去，复制相关文件夹到本地，然后搞定~But，对于大文件，DiskGenius免费版是不行的，emmm，你懂的。
+修改cmdline.txt文件 sd卡插入读卡器连电脑，直接进boot分区，找到该文件，习惯性用Sublime打开，end 到行尾，空格，加入以下
+init=/bin/sh  修改密码 sd卡插回树莓派中，hdmi连上显示器，usb连上键盘，开机，等光标开始停下。开始输入以下
+mount -rw -o remount / passwd root  嗯，这样就好了，同步并执行下初始化
+sync exec /sbin/init  到这里其实已经差不多了，用着新密码进入，然后halt关机
+还原cmdline.txt文件 再次编辑该文件，将之前加的，删除即可。弹出设备时，如果发现设备正忙，这时候在任务管理器里-性能-资源监视器-CPU-搜索句柄中搜索盘符，找到谁在占用哟",
     "inLanguage" : "en-us",
     "author" : "cheng.fan",
     "creator" : "cheng.fan",
@@ -57,11 +59,11 @@ package main import &quot;fmt&quot; // fibonacci 函数会返回一个返回 int
     "accountablePerson" : "cheng.fan",
     "copyrightHolder" : "cheng.fan",
     "copyrightYear" : "2019",
-    "datePublished": "2019-03-26 19:37:39 &#43;0800 CST",
-    "dateModified" : "2019-03-26 19:37:39 &#43;0800 CST",
-    "url" : "https://cheng.fan/2019/fish/",
-    "wordCount" : "66",
-    "keywords" : [ "go", "xVan"]
+    "datePublished": "2019-04-22 17:14:54 &#43;0800 CST",
+    "dateModified" : "2019-04-22 17:14:54 &#43;0800 CST",
+    "url" : "https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/",
+    "wordCount" : "25",
+    "keywords" : [ "树莓派", "xVan"]
 }
 </script>
 
@@ -119,16 +121,16 @@ package main import &quot;fmt&quot; // fibonacci 函数会返回一个返回 int
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Fish</h1>
+        <h1 class="post-title" itemprop="name headline">树莓派修改密码</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://cheng.fan/" rel="author">cheng.fan</a> with ♥ 
                 <span class="post-time">
-                on <time datetime=2019-03-26 itemprop="datePublished">March 26, 2019</time>
+                on <time datetime=2019-04-22 itemprop="datePublished">April 22, 2019</time>
                 </span>
                 in
                 <i class="iconfont icon-folder"></i>
                 <span class="post-category">
-                        <a href="https://cheng.fan/categories/%E7%BC%96%E7%A8%8B-%E6%8A%80%E6%9C%AF/"> 编程 | 技术 </a>
+                        <a href="https://cheng.fan/categories/%E7%A1%AC%E4%BB%B6-%E8%BD%AF%E4%BB%B6/"> 硬件 | 软件 </a>
                         
                 </span>
         </div>
@@ -149,35 +151,42 @@ package main import &quot;fmt&quot; // fibonacci 函数会返回一个返回 int
           
           
 
-          <p>第一天的鱼<br />
-emmmm 基本语法快看完了<br />
-这个函数闭包 没咋理解</p>
+          
 
-<pre><code class="language-go">package main
+<h1 id="树莓派修改密码">树莓派修改密码</h1>
 
-import &quot;fmt&quot;
+<h4 id="拿到一个硬件黑盒玩-连上网后-k3分配了个ip-多看了一眼发现识别为raspberry-嗯-黑盒里是树莓派-下意识ssh尝试连进去-发现默认密码不对-随便输入几个弱密码也不行-拆开盒子发现果然一部分是树莓派-和我在用的2b-一模一样-嫌弃网口100m-好吧-那就开始改密码吧"><em>拿到一个硬件黑盒玩，连上网后，k3分配了个ip，多看了一眼发现识别为Raspberry，嗯？黑盒里是树莓派？下意识ssh尝试连进去，发现默认密码不对，随便输入几个弱密码也不行。拆开盒子发现果然一部分是树莓派，和我在用的2b 一模一样（嫌弃网口100M），好吧，那就开始改密码吧</em></h4>
 
-// fibonacci 函数会返回一个返回 int 的函数。
-func fibonacci() func() int {
-    sum := 0
-    a := 0
-    b := 1
-    return func() int {
-        sum =  a + b
-        a = b
-        b = sum
-        return sum
-    }
-}
+<h3 id="备份文件">备份文件</h3>
 
-func main() {
-    f := fibonacci()
-    fmt.Println(f())
-    for i := 0; i &lt; 10; i++ {
-        fmt.Println(f())
-    }
-}
+<p>因为之前很多次翻车的经验，首先要做的当然能备份的东西都备着，有备无患嘛~用DiskGenius即可，因为树莓派中的文件可见，直接进去，复制相关文件夹到本地，然后搞定~But，对于大文件，DiskGenius免费版是不行的，emmm，你懂的。</p>
+
+<h3 id="修改cmdline-txt文件">修改cmdline.txt文件</h3>
+
+<p>sd卡插入读卡器连电脑，直接进boot分区，找到该文件，习惯性用Sublime打开，end 到行尾，空格，加入以下</p>
+
+<pre><code class="language-bash">init=/bin/sh
 </code></pre>
+
+<h3 id="修改密码">修改密码</h3>
+
+<p>sd卡插回树莓派中，hdmi连上显示器，usb连上键盘，开机，等光标开始停下。开始输入以下</p>
+
+<pre><code class="language-bash">mount -rw -o remount /
+passwd root
+</code></pre>
+
+<p>嗯，这样就好了，同步并执行下初始化</p>
+
+<pre><code class="language-bash">sync
+exec /sbin/init
+</code></pre>
+
+<p>到这里其实已经差不多了，用着新密码进入，然后halt关机</p>
+
+<h3 id="还原cmdline-txt文件">还原cmdline.txt文件</h3>
+
+<p>再次编辑该文件，将之前加的，删除即可。弹出设备时，如果发现设备正忙，这时候在任务管理器里-性能-资源监视器-CPU-搜索句柄中搜索盘符，找到谁在占用哟</p>
 
     </div>
 
@@ -192,7 +201,7 @@ func main() {
              
             <p class="copyright-item">
                     <span>Link:</span>
-                    <a href=https://cheng.fan/2019/fish/>https://cheng.fan/2019/fish/</span>
+                    <a href=https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/>https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/</span>
             </p>
             
              
@@ -208,8 +217,8 @@ func main() {
             <section>
             <i class="iconfont icon-tag"></i>Tag(s): 
             
-            <span class="tag"><a href="https://cheng.fan/tags/go/">
-                    #go</a></span>
+            <span class="tag"><a href="https://cheng.fan/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">
+                    #树莓派</a></span>
             
             </section>
         
@@ -221,10 +230,8 @@ func main() {
 
     <div class="post-nav">
         
-        <a href="https://cheng.fan/2019/hello-go/" class="prev" rel="prev" title="Hello Go!"><i class="iconfont icon-left"></i>&nbsp;Hello Go!</a>
+        <a href="https://cheng.fan/2019/fish/" class="prev" rel="prev" title="Fish"><i class="iconfont icon-left"></i>&nbsp;Fish</a>
          
-        
-        <a href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/" class="next" rel="next" title="树莓派修改密码">树莓派修改密码&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 

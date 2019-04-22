@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on xVan</title>
-    <link>https://cheng.fan/posts/</link>
-    <description>Recent content in Posts on xVan</description>
+    <title>树莓派 on xVan</title>
+    <link>https://cheng.fan/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</link>
+    <description>Recent content in 树莓派 on xVan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 22 Apr 2019 17:14:54 +0800</lastBuildDate>
     
-	<atom:link href="https://cheng.fan/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://cheng.fan/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -23,28 +23,6 @@ init=/bin/sh  修改密码 sd卡插回树莓派中，hdmi连上显示器，usb�
 mount -rw -o remount / passwd root  嗯，这样就好了，同步并执行下初始化
 sync exec /sbin/init  到这里其实已经差不多了，用着新密码进入，然后halt关机
 还原cmdline.txt文件 再次编辑该文件，将之前加的，删除即可。弹出设备时，如果发现设备正忙，这时候在任务管理器里-性能-资源监视器-CPU-搜索句柄中搜索盘符，找到谁在占用哟</description>
-    </item>
-    
-    <item>
-      <title>Fish</title>
-      <link>https://cheng.fan/2019/fish/</link>
-      <pubDate>Tue, 26 Mar 2019 19:37:39 +0800</pubDate>
-      
-      <guid>https://cheng.fan/2019/fish/</guid>
-      <description>第一天的鱼
-emmmm 基本语法快看完了
-这个函数闭包 没咋理解
-package main import &amp;quot;fmt&amp;quot; // fibonacci 函数会返回一个返回 int 的函数。 func fibonacci() func() int { sum := 0 a := 0 b := 1 return func() int { sum = a + b a = b b = sum return sum } } func main() { f := fibonacci() fmt.Println(f()) for i := 0; i &amp;lt; 10; i++ { fmt.Println(f()) } }  </description>
-    </item>
-    
-    <item>
-      <title>Hello Go!</title>
-      <link>https://cheng.fan/2019/hello-go/</link>
-      <pubDate>Tue, 26 Mar 2019 01:48:34 +0800</pubDate>
-      
-      <guid>https://cheng.fan/2019/hello-go/</guid>
-      <description>这可能是开始学习Go的标志，也可能不是。
-谁晓得呢~ 三天打鱼第一天 0.0</description>
     </item>
     
   </channel>

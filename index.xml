@@ -6,8 +6,53 @@
     <description>Recent content in xVan on xVan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Mar 2019 19:37:39 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 22 Apr 2019 17:14:54 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>树莓派修改密码</title>
+      <link>https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/</link>
+      <pubDate>Mon, 22 Apr 2019 17:14:54 +0800</pubDate>
+      
+      <guid>https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/</guid>
+      <description>
+
+&lt;h1 id=&#34;树莓派修改密码&#34;&gt;树莓派修改密码&lt;/h1&gt;
+
+&lt;h4 id=&#34;拿到一个硬件黑盒玩-连上网后-k3分配了个ip-多看了一眼发现识别为raspberry-嗯-黑盒里是树莓派-下意识ssh尝试连进去-发现默认密码不对-随便输入几个弱密码也不行-拆开盒子发现果然一部分是树莓派-和我在用的2b-一模一样-嫌弃网口100m-好吧-那就开始改密码吧&#34;&gt;&lt;em&gt;拿到一个硬件黑盒玩，连上网后，k3分配了个ip，多看了一眼发现识别为Raspberry，嗯？黑盒里是树莓派？下意识ssh尝试连进去，发现默认密码不对，随便输入几个弱密码也不行。拆开盒子发现果然一部分是树莓派，和我在用的2b 一模一样（嫌弃网口100M），好吧，那就开始改密码吧&lt;/em&gt;&lt;/h4&gt;
+
+&lt;h3 id=&#34;备份文件&#34;&gt;备份文件&lt;/h3&gt;
+
+&lt;p&gt;因为之前很多次翻车的经验，首先要做的当然能备份的东西都备着，有备无患嘛~用DiskGenius即可，因为树莓派中的文件可见，直接进去，复制相关文件夹到本地，然后搞定~But，对于大文件，DiskGenius免费版是不行的，emmm，你懂的。&lt;/p&gt;
+
+&lt;h3 id=&#34;修改cmdline-txt文件&#34;&gt;修改cmdline.txt文件&lt;/h3&gt;
+
+&lt;p&gt;sd卡插入读卡器连电脑，直接进boot分区，找到该文件，习惯性用Sublime打开，end 到行尾，空格，加入以下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;init=/bin/sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;修改密码&#34;&gt;修改密码&lt;/h3&gt;
+
+&lt;p&gt;sd卡插回树莓派中，hdmi连上显示器，usb连上键盘，开机，等光标开始停下。开始输入以下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mount -rw -o remount /
+passwd root
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;嗯，这样就好了，同步并执行下初始化&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sync
+exec /sbin/init
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;到这里其实已经差不多了，用着新密码进入，然后halt关机&lt;/p&gt;
+
+&lt;h3 id=&#34;还原cmdline-txt文件&#34;&gt;还原cmdline.txt文件&lt;/h3&gt;
+
+&lt;p&gt;再次编辑该文件，将之前加的，删除即可。弹出设备时，如果发现设备正忙，这时候在任务管理器里-性能-资源监视器-CPU-搜索句柄中搜索盘符，找到谁在占用哟&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Fish</title>
