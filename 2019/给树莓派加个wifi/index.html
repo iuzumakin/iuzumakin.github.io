@@ -9,9 +9,9 @@
   <meta name="description" content="一个折腾的地方">
   
   
-  <link rel="prev" href="https://cheng.fan/2019/hello-go/" />
-  <link rel="next" href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/" />
-  <link rel="canonical" href="https://cheng.fan/2019/fish/" />
+  <link rel="prev" href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/" />
+  
+  <link rel="canonical" href="https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           Fish | xVan
+           给树莓派加个wifi | xVan
        
   </title>
-  <meta name="title" content="Fish | xVan">
+  <meta name="title" content="给树莓派加个wifi | xVan">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,12 +44,17 @@
          "@id": "https://cheng.fan/"
     },
     "articleSection" : "posts",
-    "name" : "Fish",
-    "headline" : "Fish",
-    "description" : "第一天的鱼
-emmmm 基本语法快看完了
-这个函数闭包 没咋理解
-package main import &quot;fmt&quot; // fibonacci 函数会返回一个返回 int 的函数。 func fibonacci() func() int { sum := 0 a := 0 b := 1 return func() int { sum = a + b a = b b = sum return sum } } func main() { f := fibonacci() fmt.Println(f()) for i := 0; i &lt; 10; i++ { fmt.Println(f()) } }  ",
+    "name" : "给树莓派加个wifi",
+    "headline" : "给树莓派加个wifi",
+    "description" : " 手里有个还在服役的树莓派2b，没有wifi模块，想到之前从某宝购得一个EP-N8508GS接收模块，那就加上试试 扫描网络&amp;添加 iwlist wlan0 scan|grep ESSID  找到自己的ssid，开始编辑文件
+vi /etc/wpa_supplicant/wpa_supplicant.conf  添加network
+network={ ssid=&quot;Hello&quot; key_mgmt=WPA-PSK psk=&quot;12345678&quot; }  如果你要添加的是隐藏网络，则格式就得添加字段scan_ssid=1，其他不变。如果是没有密码的网络。则需要将字段key_mgmt=NONE，同时保留ssid字段即可
+启动wifi模块 一般一个reboot下去看结果，我喜欢用这两个命令
+ifdown wlan0 ifup wlan0  一般就可以了，查看ip地址就用ifconfig
+需要静态ip 需要wifi是静态ip，需要修改interfaces文件，补全如下所示
+vi /etc/network/interfaces allow-hotplug wlan0 iface wlan0 inet manual wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf iface wlan0 inet static address 192.168.1.10 netmask 255.255.255.0 gatway 192.168.1.1 dns-nameservers 192.168.1.1  至此，使用/etc/init.d/networking restart 重启网络
+其他 关于interfaces文件里的一些解释
+auto lo //表示使用localhost iface eth0 inet dhcp //表示如果有网卡ech0, 则用dhcp获得IP地址 auto wlan0 //表示如果有wlan设备，使用wlan0设备名 allow-hotplug wlan0 //表示wlan设备可以热插拨 iface wlan0 inet dhcp //表示如果有WLAN网卡wlan0, 则用dhcp获得IP地址  ",
     "inLanguage" : "en-us",
     "author" : "cheng.fan",
     "creator" : "cheng.fan",
@@ -57,11 +62,11 @@ package main import &quot;fmt&quot; // fibonacci 函数会返回一个返回 int
     "accountablePerson" : "cheng.fan",
     "copyrightHolder" : "cheng.fan",
     "copyrightYear" : "2019",
-    "datePublished": "2019-03-26 19:37:39 &#43;0800 CST",
-    "dateModified" : "2019-03-26 19:37:39 &#43;0800 CST",
-    "url" : "https://cheng.fan/2019/fish/",
-    "wordCount" : "66",
-    "keywords" : [ "go", "xVan"]
+    "datePublished": "2019-04-22 21:53:35 &#43;0800 CST",
+    "dateModified" : "2019-04-22 21:53:35 &#43;0800 CST",
+    "url" : "https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/",
+    "wordCount" : "73",
+    "keywords" : [ "树莓派", "xVan"]
 }
 </script>
 
@@ -119,16 +124,16 @@ package main import &quot;fmt&quot; // fibonacci 函数会返回一个返回 int
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Fish</h1>
+        <h1 class="post-title" itemprop="name headline">给树莓派加个wifi</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://cheng.fan/" rel="author">cheng.fan</a> with ♥ 
                 <span class="post-time">
-                on <time datetime=2019-03-26 itemprop="datePublished">March 26, 2019</time>
+                on <time datetime=2019-04-22 itemprop="datePublished">April 22, 2019</time>
                 </span>
                 in
                 <i class="iconfont icon-folder"></i>
                 <span class="post-category">
-                        <a href="https://cheng.fan/categories/%E7%BC%96%E7%A8%8B-%E6%8A%80%E6%9C%AF/"> 编程 | 技术 </a>
+                        <a href="https://cheng.fan/categories/%E7%A1%AC%E4%BB%B6-%E8%BD%AF%E4%BB%B6/"> 硬件 | 软件 </a>
                         
                 </span>
         </div>
@@ -149,34 +154,68 @@ package main import &quot;fmt&quot; // fibonacci 函数会返回一个返回 int
           
           
 
-          <p>第一天的鱼<br />
-emmmm 基本语法快看完了<br />
-这个函数闭包 没咋理解</p>
+          
 
-<pre><code class="language-go">package main
+<h4 id="手里有个还在服役的树莓派2b-没有wifi模块-想到之前从某宝购得一个ep-n8508gs接收模块-那就加上试试"><em>手里有个还在服役的树莓派2b，没有wifi模块，想到之前从某宝购得一个EP-N8508GS接收模块，那就加上试试</em></h4>
 
-import &quot;fmt&quot;
+<h3 id="扫描网络-添加">扫描网络&amp;添加</h3>
 
-// fibonacci 函数会返回一个返回 int 的函数。
-func fibonacci() func() int {
-    sum := 0
-    a := 0
-    b := 1
-    return func() int {
-        sum =  a + b
-        a = b
-        b = sum
-        return sum
-    }
+<pre><code class="language-bash">iwlist wlan0 scan|grep ESSID
+</code></pre>
+
+<p>找到自己的ssid，开始编辑文件</p>
+
+<pre><code class="language-bahs">vi /etc/wpa_supplicant/wpa_supplicant.conf 
+</code></pre>
+
+<p>添加network</p>
+
+<pre><code class="language-bash">network={
+    ssid=&quot;Hello&quot;
+    key_mgmt=WPA-PSK
+    psk=&quot;12345678&quot;
 }
+</code></pre>
 
-func main() {
-    f := fibonacci()
-    fmt.Println(f())
-    for i := 0; i &lt; 10; i++ {
-        fmt.Println(f())
-    }
-}
+<p>如果你要添加的是隐藏网络，则格式就得添加字段<strong>scan_ssid=1</strong>，其他不变。如果是没有密码的网络。则需要将字段<strong>key_mgmt=NONE</strong>，同时保留ssid字段即可</p>
+
+<h3 id="启动wifi模块">启动wifi模块</h3>
+
+<p>一般一个<strong>reboot</strong>下去看结果，我喜欢用这两个命令</p>
+
+<pre><code class="language-bash">ifdown wlan0
+ifup wlan0
+</code></pre>
+
+<p>一般就可以了，查看ip地址就用<strong>ifconfig</strong></p>
+
+<h3 id="需要静态ip">需要静态ip</h3>
+
+<p>需要wifi是静态ip，需要修改interfaces文件，补全如下所示</p>
+
+<pre><code class="language-bash">vi /etc/network/interfaces
+
+allow-hotplug wlan0
+iface wlan0 inet manual
+wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+iface wlan0 inet static
+address 192.168.1.10
+netmask 255.255.255.0
+gatway 192.168.1.1
+dns-nameservers 192.168.1.1
+</code></pre>
+
+<p>至此，使用<strong>/etc/init.d/networking restart</strong> 重启网络</p>
+
+<h3 id="其他">其他</h3>
+
+<p>关于interfaces文件里的一些解释</p>
+
+<pre><code class="language-bash">auto lo //表示使用localhost
+iface eth0 inet dhcp //表示如果有网卡ech0, 则用dhcp获得IP地址
+auto wlan0 //表示如果有wlan设备，使用wlan0设备名
+allow-hotplug wlan0 //表示wlan设备可以热插拨
+iface wlan0 inet dhcp //表示如果有WLAN网卡wlan0, 则用dhcp获得IP地址
 </code></pre>
 
     </div>
@@ -192,7 +231,7 @@ func main() {
              
             <p class="copyright-item">
                     <span>Link:</span>
-                    <a href=https://cheng.fan/2019/fish/>https://cheng.fan/2019/fish/</span>
+                    <a href=https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/>https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/</span>
             </p>
             
              
@@ -208,8 +247,8 @@ func main() {
             <section>
             <i class="iconfont icon-tag"></i>Tag(s): 
             
-            <span class="tag"><a href="https://cheng.fan/tags/go/">
-                    #go</a></span>
+            <span class="tag"><a href="https://cheng.fan/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">
+                    #树莓派</a></span>
             
             </section>
         
@@ -221,10 +260,8 @@ func main() {
 
     <div class="post-nav">
         
-        <a href="https://cheng.fan/2019/hello-go/" class="prev" rel="prev" title="Hello Go!"><i class="iconfont icon-left"></i>&nbsp;Hello Go!</a>
+        <a href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/" class="prev" rel="prev" title="树莓派修改密码"><i class="iconfont icon-left"></i>&nbsp;树莓派修改密码</a>
          
-        
-        <a href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/" class="next" rel="next" title="树莓派修改密码">树莓派修改密码&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 

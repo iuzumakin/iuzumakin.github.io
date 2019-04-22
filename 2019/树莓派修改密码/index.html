@@ -10,7 +10,7 @@
   
   
   <link rel="prev" href="https://cheng.fan/2019/fish/" />
-  
+  <link rel="next" href="https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/" />
   <link rel="canonical" href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -46,7 +46,7 @@
     "articleSection" : "posts",
     "name" : "树莓派修改密码",
     "headline" : "树莓派修改密码",
-    "description" : "树莓派修改密码 拿到一个硬件黑盒玩，连上网后，k3分配了个ip，多看了一眼发现识别为Raspberry，嗯？黑盒里是树莓派？下意识ssh尝试连进去，发现默认密码不对，随便输入几个弱密码也不行。拆开盒子发现果然一部分是树莓派，和我在用的2b 一模一样（嫌弃网口100M），好吧，那就开始改密码吧 备份文件 因为之前很多次翻车的经验，首先要做的当然能备份的东西都备着，有备无患嘛~用DiskGenius即可，因为树莓派中的文件可见，直接进去，复制相关文件夹到本地，然后搞定~But，对于大文件，DiskGenius免费版是不行的，emmm，你懂的。
+    "description" : "拿到一个硬件黑盒玩，连上网后，k3分配了个ip，多看了一眼发现识别为Raspberry，嗯？黑盒里是树莓派？下意识ssh尝试连进去，发现默认密码不对，随便输入几个弱密码也不行。拆开盒子发现果然一部分是树莓派，和我在用的2b 一模一样（嫌弃网口100M），好吧，那就开始改密码吧 备份文件 因为之前很多次翻车的经验，首先要做的当然能备份的东西都备着，有备无患嘛~用DiskGenius即可，因为树莓派中的文件可见，直接进去，复制相关文件夹到本地，然后搞定~But，对于大文件，DiskGenius免费版是不行的，emmm，你懂的。
 修改cmdline.txt文件 sd卡插入读卡器连电脑，直接进boot分区，找到该文件，习惯性用Sublime打开，end 到行尾，空格，加入以下
 init=/bin/sh  修改密码 sd卡插回树莓派中，hdmi连上显示器，usb连上键盘，开机，等光标开始停下。开始输入以下
 mount -rw -o remount / passwd root  嗯，这样就好了，同步并执行下初始化
@@ -62,7 +62,7 @@ sync exec /sbin/init  到这里其实已经差不多了，用着新密码进入�
     "datePublished": "2019-04-22 17:14:54 &#43;0800 CST",
     "dateModified" : "2019-04-22 17:14:54 &#43;0800 CST",
     "url" : "https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/",
-    "wordCount" : "25",
+    "wordCount" : "24",
     "keywords" : [ "树莓派", "xVan"]
 }
 </script>
@@ -153,8 +153,6 @@ sync exec /sbin/init  到这里其实已经差不多了，用着新密码进入�
 
           
 
-<h1 id="树莓派修改密码">树莓派修改密码</h1>
-
 <h4 id="拿到一个硬件黑盒玩-连上网后-k3分配了个ip-多看了一眼发现识别为raspberry-嗯-黑盒里是树莓派-下意识ssh尝试连进去-发现默认密码不对-随便输入几个弱密码也不行-拆开盒子发现果然一部分是树莓派-和我在用的2b-一模一样-嫌弃网口100m-好吧-那就开始改密码吧"><em>拿到一个硬件黑盒玩，连上网后，k3分配了个ip，多看了一眼发现识别为Raspberry，嗯？黑盒里是树莓派？下意识ssh尝试连进去，发现默认密码不对，随便输入几个弱密码也不行。拆开盒子发现果然一部分是树莓派，和我在用的2b 一模一样（嫌弃网口100M），好吧，那就开始改密码吧</em></h4>
 
 <h3 id="备份文件">备份文件</h3>
@@ -232,6 +230,8 @@ exec /sbin/init
         
         <a href="https://cheng.fan/2019/fish/" class="prev" rel="prev" title="Fish"><i class="iconfont icon-left"></i>&nbsp;Fish</a>
          
+        
+        <a href="https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/" class="next" rel="next" title="给树莓派加个wifi">给树莓派加个wifi&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 

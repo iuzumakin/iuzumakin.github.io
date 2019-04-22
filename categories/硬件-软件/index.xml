@@ -6,10 +6,27 @@
     <description>Recent content in 硬件 | 软件 on xVan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Apr 2019 17:14:54 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 22 Apr 2019 21:53:35 +0800</lastBuildDate>
     
 	<atom:link href="https://cheng.fan/categories/%E7%A1%AC%E4%BB%B6-%E8%BD%AF%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>给树莓派加个wifi</title>
+      <link>https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/</link>
+      <pubDate>Mon, 22 Apr 2019 21:53:35 +0800</pubDate>
+      
+      <guid>https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/</guid>
+      <description> 手里有个还在服役的树莓派2b，没有wifi模块，想到之前从某宝购得一个EP-N8508GS接收模块，那就加上试试 扫描网络&amp;amp;添加 iwlist wlan0 scan|grep ESSID  找到自己的ssid，开始编辑文件
+vi /etc/wpa_supplicant/wpa_supplicant.conf  添加network
+network={ ssid=&amp;quot;Hello&amp;quot; key_mgmt=WPA-PSK psk=&amp;quot;12345678&amp;quot; }  如果你要添加的是隐藏网络，则格式就得添加字段scan_ssid=1，其他不变。如果是没有密码的网络。则需要将字段key_mgmt=NONE，同时保留ssid字段即可
+启动wifi模块 一般一个reboot下去看结果，我喜欢用这两个命令
+ifdown wlan0 ifup wlan0  一般就可以了，查看ip地址就用ifconfig
+需要静态ip 需要wifi是静态ip，需要修改interfaces文件，补全如下所示
+vi /etc/network/interfaces allow-hotplug wlan0 iface wlan0 inet manual wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf iface wlan0 inet static address 192.168.1.10 netmask 255.255.255.0 gatway 192.168.1.1 dns-nameservers 192.168.1.1  至此，使用/etc/init.d/networking restart 重启网络
+其他 关于interfaces文件里的一些解释
+auto lo //表示使用localhost iface eth0 inet dhcp //表示如果有网卡ech0, 则用dhcp获得IP地址 auto wlan0 //表示如果有wlan设备，使用wlan0设备名 allow-hotplug wlan0 //表示wlan设备可以热插拨 iface wlan0 inet dhcp //表示如果有WLAN网卡wlan0, 则用dhcp获得IP地址  </description>
+    </item>
     
     <item>
       <title>树莓派修改密码</title>
@@ -17,7 +34,7 @@
       <pubDate>Mon, 22 Apr 2019 17:14:54 +0800</pubDate>
       
       <guid>https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/</guid>
-      <description>树莓派修改密码 拿到一个硬件黑盒玩，连上网后，k3分配了个ip，多看了一眼发现识别为Raspberry，嗯？黑盒里是树莓派？下意识ssh尝试连进去，发现默认密码不对，随便输入几个弱密码也不行。拆开盒子发现果然一部分是树莓派，和我在用的2b 一模一样（嫌弃网口100M），好吧，那就开始改密码吧 备份文件 因为之前很多次翻车的经验，首先要做的当然能备份的东西都备着，有备无患嘛~用DiskGenius即可，因为树莓派中的文件可见，直接进去，复制相关文件夹到本地，然后搞定~But，对于大文件，DiskGenius免费版是不行的，emmm，你懂的。
+      <description>拿到一个硬件黑盒玩，连上网后，k3分配了个ip，多看了一眼发现识别为Raspberry，嗯？黑盒里是树莓派？下意识ssh尝试连进去，发现默认密码不对，随便输入几个弱密码也不行。拆开盒子发现果然一部分是树莓派，和我在用的2b 一模一样（嫌弃网口100M），好吧，那就开始改密码吧 备份文件 因为之前很多次翻车的经验，首先要做的当然能备份的东西都备着，有备无患嘛~用DiskGenius即可，因为树莓派中的文件可见，直接进去，复制相关文件夹到本地，然后搞定~But，对于大文件，DiskGenius免费版是不行的，emmm，你懂的。
 修改cmdline.txt文件 sd卡插入读卡器连电脑，直接进boot分区，找到该文件，习惯性用Sublime打开，end 到行尾，空格，加入以下
 init=/bin/sh  修改密码 sd卡插回树莓派中，hdmi连上显示器，usb连上键盘，开机，等光标开始停下。开始输入以下
 mount -rw -o remount / passwd root  嗯，这样就好了，同步并执行下初始化
