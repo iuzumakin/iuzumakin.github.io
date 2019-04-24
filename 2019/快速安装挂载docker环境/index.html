@@ -9,9 +9,9 @@
   <meta name="description" content="一个折腾的地方">
   
   
-  <link rel="prev" href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/" />
-  <link rel="next" href="https://cheng.fan/2019/%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E6%8C%82%E8%BD%BDdocker%E7%8E%AF%E5%A2%83/" />
-  <link rel="canonical" href="https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/" />
+  <link rel="prev" href="https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/" />
+  
+  <link rel="canonical" href="https://cheng.fan/2019/%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E6%8C%82%E8%BD%BDdocker%E7%8E%AF%E5%A2%83/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           给树莓派加个wifi | xVan
+           快速安装,挂载,docker环境 | xVan
        
   </title>
-  <meta name="title" content="给树莓派加个wifi | xVan">
+  <meta name="title" content="快速安装,挂载,docker环境 | xVan">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,17 +44,20 @@
          "@id": "https://cheng.fan/"
     },
     "articleSection" : "posts",
-    "name" : "给树莓派加个wifi",
-    "headline" : "给树莓派加个wifi",
-    "description" : " 手里有个还在服役的树莓派2b，没有wifi模块，想到之前从某宝购得一个EP-N8508GS接收模块，那就加上试试 扫描网络&amp;添加 iwlist wlan0 scan|grep ESSID  找到自己的ssid，开始编辑文件
-vi /etc/wpa_supplicant/wpa_supplicant.conf  添加network
-network={ ssid=&quot;Hello&quot; key_mgmt=WPA-PSK psk=&quot;12345678&quot; }  如果你要添加的是隐藏网络，则格式就得添加字段scan_ssid=1，其他不变。如果是没有密码的网络。则需要将字段key_mgmt=NONE，同时保留ssid字段即可
-启动wifi模块 一般一个reboot下去看结果，我喜欢用这两个命令
-ifdown wlan0 ifup wlan0  一般就可以了，查看ip地址就用ifconfig
-需要静态ip 需要wifi是静态ip，需要修改interfaces文件，补全如下所示
-vi /etc/network/interfaces allow-hotplug wlan0 iface wlan0 inet manual wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf iface wlan0 inet static address 192.168.1.10 netmask 255.255.255.0 gateway 192.168.1.1 dns-nameservers 192.168.1.1  至此，使用/etc/init.d/networking restart 重启网络
-其他 关于interfaces文件里的一些解释
-auto lo //表示使用localhost iface eth0 inet dhcp //表示如果有网卡ech0, 则用dhcp获得IP地址 auto wlan0 //表示如果有wlan设备，使用wlan0设备名 allow-hotplug wlan0 //表示wlan设备可以热插拨 iface wlan0 inet dhcp //表示如果有WLAN网卡wlan0, 则用dhcp获得IP地址  ",
+    "name" : "快速安装,挂载,docker环境",
+    "headline" : "快速安装,挂载,docker环境",
+    "description" : "最近手里的树莓派老是被我玩坏，于是乎重装次数就多了起来，记录下这一套我需要环境的流程操作 SD卡安装 简单概括下就是sd卡format下，然后把img灌进去，所需要的软件有两个
+ SD Card Formatter
+ Win32DiskImager
+  树莓派系统初始化 连上键盘显示器，进入系统后，初始密码raspberry，修改密码，允许并enable ssh
+sudo systemctl start ssh sudo systemctl enable ssh  搞定后，就不用趴在显示器前，回到电脑前，ssh进去即可
+安装ntfs-3g和修改fstab sudo apt-get install ntfs-3g modprobe fuse  安装好后，建立硬盘的挂载点文件夹，然后修改fstab
+/dev/sda1 /mnt/v ntfs defaults,noexec,umask=0000 0 0  后面的6个0，其中前面四个表示权限(可读可写可执行)，后面两个，第一个表示不备份，第二表示不检查
+安装docker及docker-compose 树莓派装docker，最方便莫过于用get.docker.com脚本的方法了
+curl -sSL https://get.docker.com | sh  搞定后记得让普通用户也能执行docker（脚本完成时候也会提示你）
+sudo usermod -aG docker pi  接下来安装docker-compose，我就遇到一些坑，我的树莓派固件版本是2019-04-08-raspbian-stretch-lite，我采用的安装方法是这样
+wget https://bootstrap.pypa.io/get-pip.py python get-pip.py  先装好pip，然后安装些依赖
+sudo apt-get install build-essential libssl-dev libffi-dev python-dev //Debian and Ubuntu 是这样,如果是Fedora and RHEL-derivatives //sudo yum install gcc libffi-devel python-devel openssl-devel  然后，就开始愉快的安装及等待了",
     "inLanguage" : "en-us",
     "author" : "cheng.fan",
     "creator" : "cheng.fan",
@@ -62,10 +65,10 @@ auto lo //表示使用localhost iface eth0 inet dhcp //表示如果有网卡ech0
     "accountablePerson" : "cheng.fan",
     "copyrightHolder" : "cheng.fan",
     "copyrightYear" : "2019",
-    "datePublished": "2019-04-22 21:53:35 &#43;0800 CST",
-    "dateModified" : "2019-04-22 21:53:35 &#43;0800 CST",
-    "url" : "https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/",
-    "wordCount" : "73",
+    "datePublished": "2019-04-25 02:45:56 &#43;0800 CST",
+    "dateModified" : "2019-04-25 02:45:56 &#43;0800 CST",
+    "url" : "https://cheng.fan/2019/%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E6%8C%82%E8%BD%BDdocker%E7%8E%AF%E5%A2%83/",
+    "wordCount" : "78",
     "keywords" : [ "树莓派", "xVan"]
 }
 </script>
@@ -124,11 +127,11 @@ auto lo //表示使用localhost iface eth0 inet dhcp //表示如果有网卡ech0
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">给树莓派加个wifi</h1>
+        <h1 class="post-title" itemprop="name headline">快速安装,挂载,docker环境</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://cheng.fan/" rel="author">cheng.fan</a> with ♥ 
                 <span class="post-time">
-                on <time datetime=2019-04-22 itemprop="datePublished">April 22, 2019</time>
+                on <time datetime=2019-04-25 itemprop="datePublished">April 25, 2019</time>
                 </span>
                 in
                 <i class="iconfont icon-folder"></i>
@@ -156,66 +159,69 @@ auto lo //表示使用localhost iface eth0 inet dhcp //表示如果有网卡ech0
 
           
 
-<h4 id="手里有个还在服役的树莓派2b-没有wifi模块-想到之前从某宝购得一个ep-n8508gs接收模块-那就加上试试"><em>手里有个还在服役的树莓派2b，没有wifi模块，想到之前从某宝购得一个EP-N8508GS接收模块，那就加上试试</em></h4>
+<h4 id="最近手里的树莓派老是被我玩坏-于是乎重装次数就多了起来-记录下这一套我需要环境的流程操作"><em>最近手里的树莓派老是被我玩坏，于是乎重装次数就多了起来，记录下这一套我需要环境的流程操作</em></h4>
 
-<h3 id="扫描网络-添加">扫描网络&amp;添加</h3>
+<h3 id="sd卡安装">SD卡安装</h3>
 
-<pre><code class="language-bash">iwlist wlan0 scan|grep ESSID
+<p>简单概括下就是sd卡format下，然后把img灌进去，所需要的软件有两个</p>
+
+<ol>
+<li><p>SD Card Formatter</p></li>
+
+<li><p>Win32DiskImager</p></li>
+</ol>
+
+<h3 id="树莓派系统初始化">树莓派系统初始化</h3>
+
+<p>连上键盘显示器，进入系统后，初始密码raspberry，修改密码，允许并enable ssh</p>
+
+<pre><code class="language-bash">sudo systemctl start ssh
+sudo systemctl enable ssh
 </code></pre>
 
-<p>找到自己的ssid，开始编辑文件</p>
+<p>搞定后，就不用趴在显示器前，回到电脑前，ssh进去即可</p>
 
-<pre><code class="language-bahs">vi /etc/wpa_supplicant/wpa_supplicant.conf 
+<h3 id="安装ntfs-3g和修改fstab">安装ntfs-3g和修改fstab</h3>
+
+<pre><code class="language-bash">sudo apt-get install ntfs-3g
+modprobe fuse
 </code></pre>
 
-<p>添加network</p>
+<p>安装好后，建立硬盘的挂载点文件夹，然后修改fstab</p>
 
-<pre><code class="language-bash">network={
-    ssid=&quot;Hello&quot;
-    key_mgmt=WPA-PSK
-    psk=&quot;12345678&quot;
-}
+<pre><code class="language-bash">/dev/sda1 /mnt/v ntfs defaults,noexec,umask=0000 0 0
 </code></pre>
 
-<p>如果你要添加的是隐藏网络，则格式就得添加字段<strong>scan_ssid=1</strong>，其他不变。如果是没有密码的网络。则需要将字段<strong>key_mgmt=NONE</strong>，同时保留ssid字段即可</p>
+<p>后面的6个0，其中前面四个表示权限(可读可写可执行)，后面两个，第一个表示不备份，第二表示不检查</p>
 
-<h3 id="启动wifi模块">启动wifi模块</h3>
+<h3 id="安装docker及docker-compose">安装docker及docker-compose</h3>
 
-<p>一般一个<strong>reboot</strong>下去看结果，我喜欢用这两个命令</p>
+<p>树莓派装docker，最方便莫过于用get.docker.com脚本的方法了</p>
 
-<pre><code class="language-bash">ifdown wlan0
-ifup wlan0
+<pre><code class="language-bash">curl -sSL https://get.docker.com | sh
 </code></pre>
 
-<p>一般就可以了，查看ip地址就用<strong>ifconfig</strong></p>
+<p>搞定后记得让普通用户也能执行docker（脚本完成时候也会提示你）</p>
 
-<h3 id="需要静态ip">需要静态ip</h3>
-
-<p>需要wifi是静态ip，需要修改interfaces文件，补全如下所示</p>
-
-<pre><code class="language-bash">vi /etc/network/interfaces
-
-allow-hotplug wlan0
-iface wlan0 inet manual
-wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
-iface wlan0 inet static
-address 192.168.1.10
-netmask 255.255.255.0
-gateway 192.168.1.1
-dns-nameservers 192.168.1.1
+<pre><code class="language-bash">sudo usermod -aG docker pi
 </code></pre>
 
-<p>至此，使用<strong>/etc/init.d/networking restart</strong> 重启网络</p>
+<p>接下来安装docker-compose，我就遇到一些坑，我的树莓派固件版本是<strong>2019-04-08-raspbian-stretch-lite</strong>，我采用的安装方法是这样</p>
 
-<h3 id="其他">其他</h3>
+<pre><code class="language-bash">wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
+</code></pre>
 
-<p>关于interfaces文件里的一些解释</p>
+<p>先装好pip，然后安装些依赖</p>
 
-<pre><code class="language-bash">auto lo //表示使用localhost
-iface eth0 inet dhcp //表示如果有网卡ech0, 则用dhcp获得IP地址
-auto wlan0 //表示如果有wlan设备，使用wlan0设备名
-allow-hotplug wlan0 //表示wlan设备可以热插拨
-iface wlan0 inet dhcp //表示如果有WLAN网卡wlan0, 则用dhcp获得IP地址
+<pre><code class="language-bash">sudo apt-get install build-essential libssl-dev libffi-dev python-dev
+//Debian and Ubuntu 是这样,如果是Fedora and RHEL-derivatives
+//sudo yum install gcc libffi-devel python-devel openssl-devel
+</code></pre>
+
+<p>然后，就开始愉快的安装及等待了</p>
+
+<pre><code class="language-bash">sudo pip install docker-compose
 </code></pre>
 
     </div>
@@ -231,7 +237,7 @@ iface wlan0 inet dhcp //表示如果有WLAN网卡wlan0, 则用dhcp获得IP地址
              
             <p class="copyright-item">
                     <span>Link:</span>
-                    <a href=https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/>https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/</span>
+                    <a href=https://cheng.fan/2019/%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E6%8C%82%E8%BD%BDdocker%E7%8E%AF%E5%A2%83/>https://cheng.fan/2019/%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E6%8C%82%E8%BD%BDdocker%E7%8E%AF%E5%A2%83/</span>
             </p>
             
              
@@ -260,10 +266,8 @@ iface wlan0 inet dhcp //表示如果有WLAN网卡wlan0, 则用dhcp获得IP地址
 
     <div class="post-nav">
         
-        <a href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81/" class="prev" rel="prev" title="树莓派修改密码"><i class="iconfont icon-left"></i>&nbsp;树莓派修改密码</a>
+        <a href="https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/" class="prev" rel="prev" title="给树莓派加个wifi"><i class="iconfont icon-left"></i>&nbsp;给树莓派加个wifi</a>
          
-        
-        <a href="https://cheng.fan/2019/%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E6%8C%82%E8%BD%BDdocker%E7%8E%AF%E5%A2%83/" class="next" rel="next" title="快速安装,挂载,docker环境">快速安装,挂载,docker环境&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 

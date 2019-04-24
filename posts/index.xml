@@ -6,10 +6,30 @@
     <description>Recent content in Posts on xVan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Apr 2019 21:53:35 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 25 Apr 2019 02:45:56 +0800</lastBuildDate>
     
 	<atom:link href="https://cheng.fan/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>快速安装,挂载,docker环境</title>
+      <link>https://cheng.fan/2019/%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E6%8C%82%E8%BD%BDdocker%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Thu, 25 Apr 2019 02:45:56 +0800</pubDate>
+      
+      <guid>https://cheng.fan/2019/%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E6%8C%82%E8%BD%BDdocker%E7%8E%AF%E5%A2%83/</guid>
+      <description>最近手里的树莓派老是被我玩坏，于是乎重装次数就多了起来，记录下这一套我需要环境的流程操作 SD卡安装 简单概括下就是sd卡format下，然后把img灌进去，所需要的软件有两个
+ SD Card Formatter
+ Win32DiskImager
+  树莓派系统初始化 连上键盘显示器，进入系统后，初始密码raspberry，修改密码，允许并enable ssh
+sudo systemctl start ssh sudo systemctl enable ssh  搞定后，就不用趴在显示器前，回到电脑前，ssh进去即可
+安装ntfs-3g和修改fstab sudo apt-get install ntfs-3g modprobe fuse  安装好后，建立硬盘的挂载点文件夹，然后修改fstab
+/dev/sda1 /mnt/v ntfs defaults,noexec,umask=0000 0 0  后面的6个0，其中前面四个表示权限(可读可写可执行)，后面两个，第一个表示不备份，第二表示不检查
+安装docker及docker-compose 树莓派装docker，最方便莫过于用get.docker.com脚本的方法了
+curl -sSL https://get.docker.com | sh  搞定后记得让普通用户也能执行docker（脚本完成时候也会提示你）
+sudo usermod -aG docker pi  接下来安装docker-compose，我就遇到一些坑，我的树莓派固件版本是2019-04-08-raspbian-stretch-lite，我采用的安装方法是这样
+wget https://bootstrap.pypa.io/get-pip.py python get-pip.py  先装好pip，然后安装些依赖
+sudo apt-get install build-essential libssl-dev libffi-dev python-dev //Debian and Ubuntu 是这样,如果是Fedora and RHEL-derivatives //sudo yum install gcc libffi-devel python-devel openssl-devel  然后，就开始愉快的安装及等待了</description>
+    </item>
     
     <item>
       <title>给树莓派加个wifi</title>
@@ -23,7 +43,7 @@ network={ ssid=&amp;quot;Hello&amp;quot; key_mgmt=WPA-PSK psk=&amp;quot;12345678
 启动wifi模块 一般一个reboot下去看结果，我喜欢用这两个命令
 ifdown wlan0 ifup wlan0  一般就可以了，查看ip地址就用ifconfig
 需要静态ip 需要wifi是静态ip，需要修改interfaces文件，补全如下所示
-vi /etc/network/interfaces allow-hotplug wlan0 iface wlan0 inet manual wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf iface wlan0 inet static address 192.168.1.10 netmask 255.255.255.0 gatway 192.168.1.1 dns-nameservers 192.168.1.1  至此，使用/etc/init.d/networking restart 重启网络
+vi /etc/network/interfaces allow-hotplug wlan0 iface wlan0 inet manual wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf iface wlan0 inet static address 192.168.1.10 netmask 255.255.255.0 gateway 192.168.1.1 dns-nameservers 192.168.1.1  至此，使用/etc/init.d/networking restart 重启网络
 其他 关于interfaces文件里的一些解释
 auto lo //表示使用localhost iface eth0 inet dhcp //表示如果有网卡ech0, 则用dhcp获得IP地址 auto wlan0 //表示如果有wlan设备，使用wlan0设备名 allow-hotplug wlan0 //表示wlan设备可以热插拨 iface wlan0 inet dhcp //表示如果有WLAN网卡wlan0, 则用dhcp获得IP地址  </description>
     </item>

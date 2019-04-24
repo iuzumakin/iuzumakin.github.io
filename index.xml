@@ -6,8 +6,83 @@
     <description>Recent content in xVan on xVan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Apr 2019 21:53:35 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 25 Apr 2019 02:45:56 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>快速安装,挂载,docker环境</title>
+      <link>https://cheng.fan/2019/%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E6%8C%82%E8%BD%BDdocker%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Thu, 25 Apr 2019 02:45:56 +0800</pubDate>
+      
+      <guid>https://cheng.fan/2019/%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E6%8C%82%E8%BD%BDdocker%E7%8E%AF%E5%A2%83/</guid>
+      <description>
+
+&lt;h4 id=&#34;最近手里的树莓派老是被我玩坏-于是乎重装次数就多了起来-记录下这一套我需要环境的流程操作&#34;&gt;&lt;em&gt;最近手里的树莓派老是被我玩坏，于是乎重装次数就多了起来，记录下这一套我需要环境的流程操作&lt;/em&gt;&lt;/h4&gt;
+
+&lt;h3 id=&#34;sd卡安装&#34;&gt;SD卡安装&lt;/h3&gt;
+
+&lt;p&gt;简单概括下就是sd卡format下，然后把img灌进去，所需要的软件有两个&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;SD Card Formatter&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Win32DiskImager&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;树莓派系统初始化&#34;&gt;树莓派系统初始化&lt;/h3&gt;
+
+&lt;p&gt;连上键盘显示器，进入系统后，初始密码raspberry，修改密码，允许并enable ssh&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo systemctl start ssh
+sudo systemctl enable ssh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;搞定后，就不用趴在显示器前，回到电脑前，ssh进去即可&lt;/p&gt;
+
+&lt;h3 id=&#34;安装ntfs-3g和修改fstab&#34;&gt;安装ntfs-3g和修改fstab&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install ntfs-3g
+modprobe fuse
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;安装好后，建立硬盘的挂载点文件夹，然后修改fstab&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;/dev/sda1 /mnt/v ntfs defaults,noexec,umask=0000 0 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;后面的6个0，其中前面四个表示权限(可读可写可执行)，后面两个，第一个表示不备份，第二表示不检查&lt;/p&gt;
+
+&lt;h3 id=&#34;安装docker及docker-compose&#34;&gt;安装docker及docker-compose&lt;/h3&gt;
+
+&lt;p&gt;树莓派装docker，最方便莫过于用get.docker.com脚本的方法了&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;curl -sSL https://get.docker.com | sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;搞定后记得让普通用户也能执行docker（脚本完成时候也会提示你）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo usermod -aG docker pi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;接下来安装docker-compose，我就遇到一些坑，我的树莓派固件版本是&lt;strong&gt;2019-04-08-raspbian-stretch-lite&lt;/strong&gt;，我采用的安装方法是这样&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;先装好pip，然后安装些依赖&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install build-essential libssl-dev libffi-dev python-dev
+//Debian and Ubuntu 是这样,如果是Fedora and RHEL-derivatives
+//sudo yum install gcc libffi-devel python-devel openssl-devel
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后，就开始愉快的安装及等待了&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo pip install docker-compose
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>给树莓派加个wifi</title>
@@ -62,7 +137,7 @@ wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
 iface wlan0 inet static
 address 192.168.1.10
 netmask 255.255.255.0
-gatway 192.168.1.1
+gateway 192.168.1.1
 dns-nameservers 192.168.1.1
 &lt;/code&gt;&lt;/pre&gt;
 
