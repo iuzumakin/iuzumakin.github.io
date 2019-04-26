@@ -6,10 +6,34 @@
     <description>Recent content in Posts on xVan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Apr 2019 02:45:56 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 27 Apr 2019 01:54:05 +0800</lastBuildDate>
     
 	<atom:link href="https://cheng.fan/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>树莓派编译RTL8812au无线网卡</title>
+      <link>https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%BC%96%E8%AF%91rtl8812au%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1/</link>
+      <pubDate>Sat, 27 Apr 2019 01:54:05 +0800</pubDate>
+      
+      <guid>https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%BC%96%E8%AF%91rtl8812au%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1/</guid>
+      <description>树莓派2b是100M网口，于是想能不能提升下弄个千兆网口，虽然是USB2.0限制，但是也会有一定的提升吧，当然结局是比较悲伤的，不折腾了，记录下编译这个网卡的步骤，我买的是 COMFAST CF-912AC 这款的芯片是RTL8812au 安装内核 sudo apt-get install raspberrypi-kernel-headers build-essential  耐心等一会，我之前手急给中断了，坏了，重装&amp;hellip;
+编译 sudo git clone https://github.com/gnab/rtl8812au.git cd rtl8812au sudo vi Makefile CONFIG_PLATFORM_I386_PC = n CONFIG_PLATFORM_ARM_RPI = y  修改后 make -j4 ，等几分钟
+sudo make install sudo reboot  这样，看是不是能驱动起来</description>
+    </item>
+    
+    <item>
+      <title>树莓派连结NAS</title>
+      <link>https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9E%E7%BB%93nas/</link>
+      <pubDate>Sat, 27 Apr 2019 01:35:06 +0800</pubDate>
+      
+      <guid>https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9E%E7%BB%93nas/</guid>
+      <description>树莓派虽然性能差了些，但是又不是不能用，挂载硬盘后装个NAS，内网访问还是挺爽的 安装NAS sudo apt-get install samba samba-common-bin  以上两个是必须，下面两个是可选
+sudo apt-get install netatalk (用于支持AFP) sudo apt-get install avahi-daemon（用于支持网内的计算机自动发现）  配置文件 备份配置文件
+sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.back  编辑
+sudo vi /etc/samba/smb.conf  最后一行添加
+[PiNAS] # 说明信息 comment = NAS Storage # 可以访问的用户 valid users = pi,root # 共享文件的路径 path = /media/pi/ # 列目录 browseable = yes # 可写 writable = yes # 新建文件的权限为 664 create mask = 0664 # 新建目录的权限为 775 directory mask = 0775  复制时候，最好把说明信息删除，我好像记得踩过坑</description>
+    </item>
     
     <item>
       <title>树莓派快速安装,挂载,docker环境</title>
@@ -43,7 +67,7 @@ network={ ssid=&amp;quot;Hello&amp;quot; key_mgmt=WPA-PSK psk=&amp;quot;12345678
 启动wifi模块 一般一个reboot下去看结果，我喜欢用这两个命令
 ifdown wlan0 ifup wlan0  一般就可以了，查看ip地址就用ifconfig
 需要静态ip 需要wifi是静态ip，需要修改interfaces文件，补全如下所示
-vi /etc/network/interfaces allow-hotplug wlan0 iface wlan0 inet manual wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf iface wlan0 inet static address 192.168.1.10 netmask 255.255.255.0 gateway 192.168.1.1 dns-nameservers 192.168.1.1  至此，使用/etc/init.d/networking restart 重启网络
+vi /etc/network/interfaces auto lo iface lo inet loopback auto eth0 iface eth0 inet dhcp auto wlan0 allow-hotplug wlan0 iface wlan0 inet static address 192.168.1.6 netmask 255.255.255.0 gateway 192.168.1.1 dns-nameservers 223.5.5.5 wpa_conf /etc/wpa_supplicant/wpa_supplicant.conf  至此，使用/etc/init.d/networking restart 重启网络，reboot
 其他 关于interfaces文件里的一些解释
 auto lo //表示使用localhost iface eth0 inet dhcp //表示如果有网卡ech0, 则用dhcp获得IP地址 auto wlan0 //表示如果有wlan设备，使用wlan0设备名 allow-hotplug wlan0 //表示wlan设备可以热插拨 iface wlan0 inet dhcp //表示如果有WLAN网卡wlan0, 则用dhcp获得IP地址  </description>
     </item>

@@ -9,9 +9,9 @@
   <meta name="description" content="一个折腾的地方">
   
   
-  <link rel="prev" href="https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/" />
-  <link rel="next" href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9E%E7%BB%93nas/" />
-  <link rel="canonical" href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E6%8C%82%E8%BD%BDdocker%E7%8E%AF%E5%A2%83/" />
+  <link rel="prev" href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E6%8C%82%E8%BD%BDdocker%E7%8E%AF%E5%A2%83/" />
+  <link rel="next" href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%BC%96%E8%AF%91rtl8812au%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1/" />
+  <link rel="canonical" href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9E%E7%BB%93nas/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           树莓派快速安装,挂载,docker环境 | xVan
+           树莓派连结NAS | xVan
        
   </title>
-  <meta name="title" content="树莓派快速安装,挂载,docker环境 | xVan">
+  <meta name="title" content="树莓派连结NAS | xVan">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,20 +44,13 @@
          "@id": "https://cheng.fan/"
     },
     "articleSection" : "posts",
-    "name" : "树莓派快速安装,挂载,docker环境",
-    "headline" : "树莓派快速安装,挂载,docker环境",
-    "description" : "最近手里的树莓派老是被我玩坏，于是乎重装次数就多了起来，记录下这一套我需要环境的流程操作 SD卡安装 简单概括下就是sd卡format下，然后把img灌进去，所需要的软件有两个
- SD Card Formatter
- Win32DiskImager
-  树莓派系统初始化 连上键盘显示器，进入系统后，初始密码raspberry，修改密码，允许并enable ssh
-sudo systemctl start ssh sudo systemctl enable ssh  搞定后，就不用趴在显示器前，回到电脑前，ssh进去即可
-安装ntfs-3g和修改fstab sudo apt-get install ntfs-3g modprobe fuse  安装好后，建立硬盘的挂载点文件夹，然后修改fstab
-/dev/sda1 /mnt/v ntfs defaults,noexec,umask=0000 0 0  后面的6个0，其中前面四个表示权限(可读可写可执行)，后面两个，第一个表示不备份，第二表示不检查
-安装docker及docker-compose 树莓派装docker，最方便莫过于用get.docker.com脚本的方法了
-curl -sSL https://get.docker.com | sh  搞定后记得让普通用户也能执行docker（脚本完成时候也会提示你）
-sudo usermod -aG docker pi  接下来安装docker-compose，我就遇到一些坑，我的树莓派固件版本是2019-04-08-raspbian-stretch-lite，我采用的安装方法是这样
-wget https://bootstrap.pypa.io/get-pip.py python get-pip.py  先装好pip，然后安装些依赖
-sudo apt-get install build-essential libssl-dev libffi-dev python-dev //Debian and Ubuntu 是这样,如果是Fedora and RHEL-derivatives //sudo yum install gcc libffi-devel python-devel openssl-devel  然后，就开始愉快的安装及等待了",
+    "name" : "树莓派连结NAS",
+    "headline" : "树莓派连结NAS",
+    "description" : "树莓派虽然性能差了些，但是又不是不能用，挂载硬盘后装个NAS，内网访问还是挺爽的 安装NAS sudo apt-get install samba samba-common-bin  以上两个是必须，下面两个是可选
+sudo apt-get install netatalk (用于支持AFP) sudo apt-get install avahi-daemon（用于支持网内的计算机自动发现）  配置文件 备份配置文件
+sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.back  编辑
+sudo vi /etc/samba/smb.conf  最后一行添加
+[PiNAS] # 说明信息 comment = NAS Storage # 可以访问的用户 valid users = pi,root # 共享文件的路径 path = /media/pi/ # 列目录 browseable = yes # 可写 writable = yes # 新建文件的权限为 664 create mask = 0664 # 新建目录的权限为 775 directory mask = 0775  复制时候，最好把说明信息删除，我好像记得踩过坑",
     "inLanguage" : "en-us",
     "author" : "cheng.fan",
     "creator" : "cheng.fan",
@@ -65,10 +58,10 @@ sudo apt-get install build-essential libssl-dev libffi-dev python-dev //Debian a
     "accountablePerson" : "cheng.fan",
     "copyrightHolder" : "cheng.fan",
     "copyrightYear" : "2019",
-    "datePublished": "2019-04-25 02:45:56 &#43;0800 CST",
-    "dateModified" : "2019-04-25 02:45:56 &#43;0800 CST",
-    "url" : "https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E6%8C%82%E8%BD%BDdocker%E7%8E%AF%E5%A2%83/",
-    "wordCount" : "78",
+    "datePublished": "2019-04-27 01:35:06 &#43;0800 CST",
+    "dateModified" : "2019-04-27 01:35:06 &#43;0800 CST",
+    "url" : "https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9E%E7%BB%93nas/",
+    "wordCount" : "82",
     "keywords" : [ "树莓派", "xVan"]
 }
 </script>
@@ -127,11 +120,11 @@ sudo apt-get install build-essential libssl-dev libffi-dev python-dev //Debian a
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">树莓派快速安装,挂载,docker环境</h1>
+        <h1 class="post-title" itemprop="name headline">树莓派连结NAS</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://cheng.fan/" rel="author">cheng.fan</a> with ♥ 
                 <span class="post-time">
-                on <time datetime=2019-04-25 itemprop="datePublished">April 25, 2019</time>
+                on <time datetime=2019-04-27 itemprop="datePublished">April 27, 2019</time>
                 </span>
                 in
                 <i class="iconfont icon-folder"></i>
@@ -159,70 +152,61 @@ sudo apt-get install build-essential libssl-dev libffi-dev python-dev //Debian a
 
           
 
-<h4 id="最近手里的树莓派老是被我玩坏-于是乎重装次数就多了起来-记录下这一套我需要环境的流程操作"><em>最近手里的树莓派老是被我玩坏，于是乎重装次数就多了起来，记录下这一套我需要环境的流程操作</em></h4>
+<h4 id="树莓派虽然性能差了些-但是又不是不能用-挂载硬盘后装个nas-内网访问还是挺爽的"><em>树莓派虽然性能差了些，但是又不是不能用，挂载硬盘后装个NAS，内网访问还是挺爽的</em></h4>
 
-<h3 id="sd卡安装">SD卡安装</h3>
+<h3 id="安装nas">安装NAS</h3>
 
-<p>简单概括下就是sd卡format下，然后把img灌进去，所需要的软件有两个</p>
-
-<ol>
-<li><p>SD Card Formatter</p></li>
-
-<li><p>Win32DiskImager</p></li>
-</ol>
-
-<h3 id="树莓派系统初始化">树莓派系统初始化</h3>
-
-<p>连上键盘显示器，进入系统后，初始密码raspberry，修改密码，允许并enable ssh</p>
-
-<pre><code class="language-bash">sudo systemctl start ssh
-sudo systemctl enable ssh
+<pre><code class="language-bash">sudo apt-get install samba samba-common-bin
 </code></pre>
 
-<p>搞定后，就不用趴在显示器前，回到电脑前，ssh进去即可</p>
+<p>以上两个是必须，下面两个是可选</p>
 
-<h3 id="安装ntfs-3g和修改fstab">安装ntfs-3g和修改fstab</h3>
-
-<pre><code class="language-bash">sudo apt-get install ntfs-3g
-modprobe fuse
+<pre><code class="language-bash">sudo apt-get install netatalk (用于支持AFP)
+sudo apt-get install avahi-daemon（用于支持网内的计算机自动发现）
 </code></pre>
 
-<p>安装好后，建立硬盘的挂载点文件夹，然后修改fstab</p>
+<h3 id="配置文件">配置文件</h3>
 
-<pre><code class="language-bash">/dev/sda1 /mnt/v ntfs defaults,noexec,umask=0000 0 0
+<p>备份配置文件</p>
+
+<pre><code class="language-bash">sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.back
 </code></pre>
 
-<p>后面的6个0，其中前面四个表示权限(可读可写可执行)，后面两个，第一个表示不备份，第二表示不检查</p>
+<p>编辑</p>
 
-<h3 id="安装docker及docker-compose">安装docker及docker-compose</h3>
-
-<p>树莓派装docker，最方便莫过于用get.docker.com脚本的方法了</p>
-
-<pre><code class="language-bash">curl -sSL https://get.docker.com | sh
+<pre><code class="language-bash">sudo vi /etc/samba/smb.conf
 </code></pre>
 
-<p>搞定后记得让普通用户也能执行docker（脚本完成时候也会提示你）</p>
+<p>最后一行添加</p>
 
-<pre><code class="language-bash">sudo usermod -aG docker pi
+<pre><code class="language-bash">[PiNAS]
+    # 说明信息
+    comment = NAS Storage
+    # 可以访问的用户
+    valid users = pi,root
+    # 共享文件的路径
+    path = /media/pi/
+    # 列目录
+    browseable = yes
+    # 可写
+    writable = yes
+    # 新建文件的权限为 664
+    create mask = 0664
+    # 新建目录的权限为 775
+    directory mask = 0775
 </code></pre>
 
-<p>接下来安装docker-compose，我就遇到一些坑，我的树莓派固件版本是<strong>2019-04-08-raspbian-stretch-lite</strong>，我采用的安装方法是这样</p>
+<p>复制时候，最好把说明信息删除，我好像记得踩过坑</p>
 
-<pre><code class="language-bash">wget https://bootstrap.pypa.io/get-pip.py
-python get-pip.py
+<p>配置好后，测试下是否有错误 <strong>testparm</strong></p>
+
+<h3 id="添加账户与重启服务">添加账户与重启服务</h3>
+
+<pre><code class="language-bash">sudo smbpasswd -a pi
+sudo /etc/init.d/samba restart
 </code></pre>
 
-<p>先装好pip，然后安装些依赖</p>
-
-<pre><code class="language-bash">sudo apt-get install build-essential libssl-dev libffi-dev python-dev
-//Debian and Ubuntu 是这样,如果是Fedora and RHEL-derivatives
-//sudo yum install gcc libffi-devel python-devel openssl-devel
-</code></pre>
-
-<p>然后，就开始愉快的安装及等待了</p>
-
-<pre><code class="language-bash">sudo pip install docker-compose
-</code></pre>
+<p>好了，就这样，没了</p>
 
     </div>
 
@@ -237,7 +221,7 @@ python get-pip.py
              
             <p class="copyright-item">
                     <span>Link:</span>
-                    <a href=https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E6%8C%82%E8%BD%BDdocker%E7%8E%AF%E5%A2%83/>https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E6%8C%82%E8%BD%BDdocker%E7%8E%AF%E5%A2%83/</span>
+                    <a href=https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9E%E7%BB%93nas/>https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9E%E7%BB%93nas/</span>
             </p>
             
              
@@ -266,10 +250,10 @@ python get-pip.py
 
     <div class="post-nav">
         
-        <a href="https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/" class="prev" rel="prev" title="给树莓派加个wifi"><i class="iconfont icon-left"></i>&nbsp;给树莓派加个wifi</a>
+        <a href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E6%8C%82%E8%BD%BDdocker%E7%8E%AF%E5%A2%83/" class="prev" rel="prev" title="树莓派快速安装,挂载,docker环境"><i class="iconfont icon-left"></i>&nbsp;树莓派快速安装,挂载,docker环境</a>
          
         
-        <a href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9E%E7%BB%93nas/" class="next" rel="next" title="树莓派连结NAS">树莓派连结NAS&nbsp;<i class="iconfont icon-right"></i></a>
+        <a href="https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%BC%96%E8%AF%91rtl8812au%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1/" class="next" rel="next" title="树莓派编译RTL8812au无线网卡">树莓派编译RTL8812au无线网卡&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 

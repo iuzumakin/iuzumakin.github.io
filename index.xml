@@ -6,8 +6,111 @@
     <description>Recent content in xVan on xVan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Apr 2019 02:45:56 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 27 Apr 2019 01:54:05 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>树莓派编译RTL8812au无线网卡</title>
+      <link>https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%BC%96%E8%AF%91rtl8812au%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1/</link>
+      <pubDate>Sat, 27 Apr 2019 01:54:05 +0800</pubDate>
+      
+      <guid>https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%BC%96%E8%AF%91rtl8812au%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1/</guid>
+      <description>
+
+&lt;h4 id=&#34;树莓派2b是100m网口-于是想能不能提升下弄个千兆网口-虽然是usb2-0限制-但是也会有一定的提升吧-当然结局是比较悲伤的-不折腾了-记录下编译这个网卡的步骤-我买的是-comfast-cf-912ac-这款的芯片是rtl8812au&#34;&gt;&lt;em&gt;树莓派2b是100M网口，于是想能不能提升下弄个千兆网口，虽然是USB2.0限制，但是也会有一定的提升吧，当然结局是比较悲伤的，不折腾了，记录下编译这个网卡的步骤，我买的是 COMFAST CF-912AC 这款的芯片是RTL8812au&lt;/em&gt;&lt;/h4&gt;
+
+&lt;h3 id=&#34;安装内核&#34;&gt;安装内核&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install raspberrypi-kernel-headers build-essential
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;耐心等一会，我之前手急给中断了，坏了，重装&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;编译&#34;&gt;编译&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo git clone https://github.com/gnab/rtl8812au.git
+cd rtl8812au
+sudo vi Makefile
+
+CONFIG_PLATFORM_I386_PC = n
+CONFIG_PLATFORM_ARM_RPI = y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;修改后 &lt;strong&gt;make -j4&lt;/strong&gt; ，等几分钟&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo make install
+sudo reboot
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样，看是不是能驱动起来&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>树莓派连结NAS</title>
+      <link>https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9E%E7%BB%93nas/</link>
+      <pubDate>Sat, 27 Apr 2019 01:35:06 +0800</pubDate>
+      
+      <guid>https://cheng.fan/2019/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9E%E7%BB%93nas/</guid>
+      <description>
+
+&lt;h4 id=&#34;树莓派虽然性能差了些-但是又不是不能用-挂载硬盘后装个nas-内网访问还是挺爽的&#34;&gt;&lt;em&gt;树莓派虽然性能差了些，但是又不是不能用，挂载硬盘后装个NAS，内网访问还是挺爽的&lt;/em&gt;&lt;/h4&gt;
+
+&lt;h3 id=&#34;安装nas&#34;&gt;安装NAS&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install samba samba-common-bin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上两个是必须，下面两个是可选&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install netatalk (用于支持AFP)
+sudo apt-get install avahi-daemon（用于支持网内的计算机自动发现）
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;配置文件&#34;&gt;配置文件&lt;/h3&gt;
+
+&lt;p&gt;备份配置文件&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.back
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;编辑&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo vi /etc/samba/smb.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后一行添加&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[PiNAS]
+    # 说明信息
+    comment = NAS Storage
+    # 可以访问的用户
+    valid users = pi,root
+    # 共享文件的路径
+    path = /media/pi/
+    # 列目录
+    browseable = yes
+    # 可写
+    writable = yes
+    # 新建文件的权限为 664
+    create mask = 0664
+    # 新建目录的权限为 775
+    directory mask = 0775
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;复制时候，最好把说明信息删除，我好像记得踩过坑&lt;/p&gt;
+
+&lt;p&gt;配置好后，测试下是否有错误 &lt;strong&gt;testparm&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;添加账户与重启服务&#34;&gt;添加账户与重启服务&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo smbpasswd -a pi
+sudo /etc/init.d/samba restart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;好了，就这样，没了&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>树莓派快速安装,挂载,docker环境</title>
@@ -130,18 +233,23 @@ ifup wlan0
 &lt;p&gt;需要wifi是静态ip，需要修改interfaces文件，补全如下所示&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;vi /etc/network/interfaces
+auto lo
+iface lo inet loopback
 
+auto eth0
+iface eth0 inet dhcp
+
+auto wlan0
 allow-hotplug wlan0
-iface wlan0 inet manual
-wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
 iface wlan0 inet static
-address 192.168.1.10
+address 192.168.1.6
 netmask 255.255.255.0
 gateway 192.168.1.1
-dns-nameservers 192.168.1.1
+dns-nameservers 223.5.5.5
+wpa_conf /etc/wpa_supplicant/wpa_supplicant.conf
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;至此，使用&lt;strong&gt;/etc/init.d/networking restart&lt;/strong&gt; 重启网络&lt;/p&gt;
+&lt;p&gt;至此，使用&lt;strong&gt;/etc/init.d/networking restart&lt;/strong&gt; 重启网络，reboot&lt;/p&gt;
 
 &lt;h3 id=&#34;其他&#34;&gt;其他&lt;/h3&gt;
 

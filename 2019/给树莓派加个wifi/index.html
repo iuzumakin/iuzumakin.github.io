@@ -52,7 +52,7 @@ network={ ssid=&quot;Hello&quot; key_mgmt=WPA-PSK psk=&quot;12345678&quot; }  �
 启动wifi模块 一般一个reboot下去看结果，我喜欢用这两个命令
 ifdown wlan0 ifup wlan0  一般就可以了，查看ip地址就用ifconfig
 需要静态ip 需要wifi是静态ip，需要修改interfaces文件，补全如下所示
-vi /etc/network/interfaces allow-hotplug wlan0 iface wlan0 inet manual wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf iface wlan0 inet static address 192.168.1.10 netmask 255.255.255.0 gateway 192.168.1.1 dns-nameservers 192.168.1.1  至此，使用/etc/init.d/networking restart 重启网络
+vi /etc/network/interfaces auto lo iface lo inet loopback auto eth0 iface eth0 inet dhcp auto wlan0 allow-hotplug wlan0 iface wlan0 inet static address 192.168.1.6 netmask 255.255.255.0 gateway 192.168.1.1 dns-nameservers 223.5.5.5 wpa_conf /etc/wpa_supplicant/wpa_supplicant.conf  至此，使用/etc/init.d/networking restart 重启网络，reboot
 其他 关于interfaces文件里的一些解释
 auto lo //表示使用localhost iface eth0 inet dhcp //表示如果有网卡ech0, 则用dhcp获得IP地址 auto wlan0 //表示如果有wlan设备，使用wlan0设备名 allow-hotplug wlan0 //表示wlan设备可以热插拨 iface wlan0 inet dhcp //表示如果有WLAN网卡wlan0, 则用dhcp获得IP地址  ",
     "inLanguage" : "en-us",
@@ -65,7 +65,7 @@ auto lo //表示使用localhost iface eth0 inet dhcp //表示如果有网卡ech0
     "datePublished": "2019-04-22 21:53:35 &#43;0800 CST",
     "dateModified" : "2019-04-22 21:53:35 &#43;0800 CST",
     "url" : "https://cheng.fan/2019/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%8A%A0%E4%B8%AAwifi/",
-    "wordCount" : "73",
+    "wordCount" : "83",
     "keywords" : [ "树莓派", "xVan"]
 }
 </script>
@@ -194,18 +194,23 @@ ifup wlan0
 <p>需要wifi是静态ip，需要修改interfaces文件，补全如下所示</p>
 
 <pre><code class="language-bash">vi /etc/network/interfaces
+auto lo
+iface lo inet loopback
 
+auto eth0
+iface eth0 inet dhcp
+
+auto wlan0
 allow-hotplug wlan0
-iface wlan0 inet manual
-wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
 iface wlan0 inet static
-address 192.168.1.10
+address 192.168.1.6
 netmask 255.255.255.0
 gateway 192.168.1.1
-dns-nameservers 192.168.1.1
+dns-nameservers 223.5.5.5
+wpa_conf /etc/wpa_supplicant/wpa_supplicant.conf
 </code></pre>
 
-<p>至此，使用<strong>/etc/init.d/networking restart</strong> 重启网络</p>
+<p>至此，使用<strong>/etc/init.d/networking restart</strong> 重启网络，reboot</p>
 
 <h3 id="其他">其他</h3>
 
