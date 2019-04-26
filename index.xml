@@ -28,7 +28,7 @@
 
 &lt;h3 id=&#34;编译&#34;&gt;编译&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo git clone https://github.com/gnab/rtl8812au.git
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo git clone https://github.com/diederikdehaas/rtl8812AU
 cd rtl8812au
 sudo vi Makefile
 

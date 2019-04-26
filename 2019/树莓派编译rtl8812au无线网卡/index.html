@@ -47,7 +47,7 @@
     "name" : "树莓派编译RTL8812au无线网卡",
     "headline" : "树莓派编译RTL8812au无线网卡",
     "description" : "树莓派2b是100M网口，于是想能不能提升下弄个千兆网口，虽然是USB2.0限制，但是也会有一定的提升吧，当然结局是比较悲伤的，不折腾了，记录下编译这个网卡的步骤，我买的是 COMFAST CF-912AC 这款的芯片是RTL8812au 安装内核 sudo apt-get install raspberrypi-kernel-headers build-essential  耐心等一会，我之前手急给中断了，坏了，重装&hellip;
-编译 sudo git clone https://github.com/gnab/rtl8812au.git cd rtl8812au sudo vi Makefile CONFIG_PLATFORM_I386_PC = n CONFIG_PLATFORM_ARM_RPI = y  修改后 make -j4 ，等几分钟
+编译 sudo git clone https://github.com/diederikdehaas/rtl8812AU cd rtl8812au sudo vi Makefile CONFIG_PLATFORM_I386_PC = n CONFIG_PLATFORM_ARM_RPI = y  修改后 make -j4 ，等几分钟
 sudo make install sudo reboot  这样，看是不是能驱动起来",
     "inLanguage" : "en-us",
     "author" : "cheng.fan",
@@ -161,7 +161,7 @@ sudo make install sudo reboot  这样，看是不是能驱动起来",
 
 <h3 id="编译">编译</h3>
 
-<pre><code class="language-bash">sudo git clone https://github.com/gnab/rtl8812au.git
+<pre><code class="language-bash">sudo git clone https://github.com/diederikdehaas/rtl8812AU
 cd rtl8812au
 sudo vi Makefile
 
